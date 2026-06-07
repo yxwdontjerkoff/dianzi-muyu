@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>????</title>
+<title>电子木鱼</title>
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -34,20 +34,15 @@
     -webkit-user-select: none;
   }
 
-  /* Incense smoke particles */
   .smoke-container {
-    position: fixed;
-    top: 0; left: 0;
+    position: fixed; top: 0; left: 0;
     width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 0;
+    pointer-events: none; z-index: 0;
   }
   .smoke {
     position: absolute;
-    bottom: 30%;
-    left: 15%;
-    width: 4px;
-    height: 4px;
+    bottom: 30%; left: 15%;
+    width: 4px; height: 4px;
     background: rgba(200, 180, 150, 0.3);
     border-radius: 50%;
     animation: smokeRise 6s ease-out infinite;
@@ -62,42 +57,29 @@
     100% { transform: translateY(-180px) translateX(-8px) scale(6); opacity: 0; }
   }
 
-  /* Top bar */
   .header {
-    position: relative;
-    z-index: 10;
-    width: 100%;
-    max-width: 420px;
+    position: relative; z-index: 10;
+    width: 100%; max-width: 420px;
     padding: 16px 20px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex; justify-content: space-between; align-items: center;
   }
   .title {
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--gold);
-    letter-spacing: 0.12em;
+    font-size: 22px; font-weight: 700;
+    color: var(--gold); letter-spacing: 0.12em;
   }
   .share-btn {
     background: rgba(212, 168, 83, 0.15);
     border: 1px solid rgba(212, 168, 83, 0.3);
     color: var(--gold-light);
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.2s;
-    letter-spacing: 0.06em;
+    padding: 6px 14px; border-radius: 20px;
+    font-size: 13px; cursor: pointer;
+    transition: all 0.2s; letter-spacing: 0.06em;
   }
   .share-btn:active { background: rgba(212, 168, 83, 0.3); transform: scale(0.95); }
 
-  /* Merit display */
   .merit-area {
-    position: relative;
-    z-index: 10;
-    text-align: center;
-    margin-top: 8px;
+    position: relative; z-index: 10;
+    text-align: center; margin-top: 8px;
   }
   .merit-label {
     font-size: 13px;
@@ -105,40 +87,28 @@
     letter-spacing: 0.14em;
   }
   .merit-count {
-    font-size: 52px;
-    font-weight: 800;
+    font-size: 52px; font-weight: 800;
     color: var(--gold-light);
     text-shadow: 0 0 30px rgba(212, 168, 83, 0.4);
-    line-height: 1.1;
-    transition: color 0.3s;
+    line-height: 1.1; transition: color 0.3s;
   }
   .merit-count.zeroed {
     color: #e74c3c;
     text-shadow: 0 0 30px rgba(231, 76, 60, 0.5);
   }
 
-  /* Wooden fish area */
   .fish-container {
-    position: relative;
-    z-index: 10;
+    position: relative; z-index: 10;
     flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 20px;
+    display: flex; align-items: center; justify-content: center;
+    width: 100%; padding: 20px;
   }
   .fish-wrapper {
-    position: relative;
-    cursor: pointer;
+    position: relative; cursor: pointer;
     transition: transform 0.08s ease-out;
   }
-  .fish-wrapper.tapping {
-    transform: scale(0.92);
-  }
-  .fish-wrapper.shake {
-    animation: shake 0.5s ease-out;
-  }
+  .fish-wrapper.tapping { transform: scale(0.92); }
+  .fish-wrapper.shake { animation: shake 0.5s ease-out; }
 
   @keyframes shake {
     0%, 100% { transform: translateX(0); }
@@ -153,44 +123,32 @@
     90%, 100% { transform: translateX(0); }
   }
 
-  /* Mallet */
   .mallet {
-    position: absolute;
-    top: -70px;
-    left: 50%;
+    position: absolute; top: -70px; left: 50%;
     transform: translateX(-50%) rotate(-15deg);
     transform-origin: bottom center;
     transition: transform 0.06s ease-in;
-    z-index: 20;
-    pointer-events: none;
+    z-index: 20; pointer-events: none;
   }
   .mallet.strike {
     transform: translateX(-50%) rotate(10deg);
     transition: transform 0.04s ease-out;
   }
-  .mallet svg {
-    width: 80px;
-    height: auto;
-  }
+  .mallet svg { width: 80px; height: auto; }
 
-  /* Wooden fish SVG area */
   .wooden-fish { position: relative; z-index: 5; }
   .wooden-fish svg {
-    width: 200px;
-    height: auto;
+    width: 200px; height: auto;
     filter: drop-shadow(0 8px 24px rgba(0,0,0,0.5));
   }
 
-  /* Ripple effect */
   .ripple {
-    position: absolute;
-    top: 50%; left: 50%;
+    position: absolute; top: 50%; left: 50%;
     width: 0; height: 0;
     border: 2px solid var(--gold);
     border-radius: 50%;
     transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 0;
+    pointer-events: none; z-index: 0;
     opacity: 0.6;
     animation: rippleOut 0.6s ease-out forwards;
   }
@@ -199,13 +157,9 @@
     100% { width: 240px; height: 240px; opacity: 0; }
   }
 
-  /* Floating +1 */
   .float-text {
-    position: fixed;
-    pointer-events: none;
-    z-index: 30;
-    font-size: 28px;
-    font-weight: 800;
+    position: fixed; pointer-events: none; z-index: 30;
+    font-size: 28px; font-weight: 800;
     color: var(--gold-light);
     text-shadow: 0 0 12px rgba(212, 168, 83, 0.6);
     animation: floatUp 0.9s ease-out forwards;
@@ -216,24 +170,17 @@
     100% { opacity: 0; transform: translateY(-90px) scale(0.8); }
   }
 
-  /* Reset overlay */
   .reset-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 100;
+    position: fixed; inset: 0; z-index: 100;
     pointer-events: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
   }
   .reset-text {
-    font-size: 36px;
-    font-weight: 900;
+    font-size: 36px; font-weight: 900;
     color: #e74c3c;
     text-shadow: 0 0 40px rgba(231, 76, 60, 0.7), 0 4px 20px rgba(0,0,0,0.6);
     animation: resetPop 1.2s ease-out forwards;
-    text-align: center;
-    line-height: 1.4;
+    text-align: center; line-height: 1.4;
   }
   @keyframes resetPop {
     0% { opacity: 0; transform: scale(0.3); }
@@ -243,61 +190,46 @@
     100% { opacity: 0; transform: scale(1); }
   }
 
-  /* Laughing emoji burst */
   .emoji-burst {
-    position: fixed;
-    pointer-events: none;
-    z-index: 101;
+    position: fixed; pointer-events: none; z-index: 101;
     font-size: 40px;
     animation: emojiFly 1.8s ease-out forwards;
   }
   @keyframes emojiFly {
-    0% { opacity: 1; transform: translate(0, 0) scale(0.3) rotate(0deg); }
-    30% { opacity: 1; transform: translate(var(--dx30), var(--dy30)) scale(1.2) rotate(var(--rot30)); }
-    100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0.5) rotate(var(--rot)); }
+    0% { opacity: 1; transform: translate(0,0) scale(0.3) rotate(0deg); }
+    30% { opacity: 1; transform: translate(var(--dx30),var(--dy30)) scale(1.2) rotate(var(--rot30)); }
+    100% { opacity: 0; transform: translate(var(--dx),var(--dy)) scale(0.5) rotate(var(--rot)); }
   }
 
-  /* Screen flash */
   .flash {
-    position: fixed;
-    inset: 0;
-    z-index: 99;
-    pointer-events: none;
+    position: fixed; inset: 0; z-index: 99; pointer-events: none;
     background: rgba(231, 76, 60, 0.08);
     animation: flashOut 0.4s ease-out forwards;
   }
-  @keyframes flashOut {
-    0% { opacity: 1; }
-    100% { opacity: 0; }
-  }
+  @keyframes flashOut { 0% { opacity: 1; } 100% { opacity: 0; } }
 
-  /* Footer */
   .footer {
-    position: relative;
-    z-index: 10;
+    position: relative; z-index: 10;
     padding: 12px 20px 20px;
     text-align: center;
     color: rgba(200, 180, 160, 0.35);
-    font-size: 11px;
-    letter-spacing: 0.1em;
+    font-size: 11px; letter-spacing: 0.1em;
   }
 </style>
 </head>
 <body>
 
 <div class="smoke-container">
-  <div class="smoke"></div>
-  <div class="smoke"></div>
-  <div class="smoke"></div>
+  <div class="smoke"></div><div class="smoke"></div><div class="smoke"></div>
 </div>
 
 <div class="header">
-  <span class="title">????</span>
-  <button class="share-btn" id="shareBtn" title="??">??</button>
+  <span class="title">電子木魚</span>
+  <button class="share-btn" id="shareBtn" title="分享">分享</button>
 </div>
 
 <div class="merit-area">
-  <div class="merit-label">? ?</div>
+  <div class="merit-label">功 德</div>
   <div class="merit-count" id="meritCount">0</div>
 </div>
 
@@ -379,7 +311,7 @@
   </div>
 </div>
 
-<div class="footer">?? ? ????</div>
+<div class="footer">叩叩 · 功德無量</div>
 
 <script>
 (function() {
@@ -399,7 +331,6 @@
   function playKnock() {
     if (!audioCtx) return;
     var now = audioCtx.currentTime;
-
     var osc = audioCtx.createOscillator();
     var gain = audioCtx.createGain();
     osc.type = 'triangle';
@@ -411,7 +342,6 @@
     gain.connect(audioCtx.destination);
     osc.start(now);
     osc.stop(now + 0.12);
-
     var osc2 = audioCtx.createOscillator();
     var gain2 = audioCtx.createGain();
     osc2.type = 'sine';
