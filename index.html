@@ -1,0 +1,581 @@
+﻿<!DOCTYPE html>
+<html lang=""zh-CN"">
+<head>
+<meta charset=""UTF-8"">
+<meta name=""viewport"" content=""width=device-width, initial-scale=1.0, user-scalable=no"">
+<title>电子木鱼</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #1a0f0a;
+    --panel: #2a1a10;
+    --gold: #d4a853;
+    --gold-light: #f0d68a;
+    --text: #e8d5b5;
+    --accent: #c0392b;
+  }
+
+  body {
+    font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+    background: var(--bg);
+    background-image:
+      radial-gradient(ellipse at 50% 30%, #2a1a10 0%, transparent 70%),
+      radial-gradient(ellipse at 50% 80%, #1a0f0a 0%, transparent 60%);
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  /* Incense smoke particles */
+  .smoke-container {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .smoke {
+    position: absolute;
+    bottom: 30%;
+    left: 15%;
+    width: 4px;
+    height: 4px;
+    background: rgba(200, 180, 150, 0.3);
+    border-radius: 50%;
+    animation: smokeRise 6s ease-out infinite;
+  }
+  .smoke:nth-child(1) { animation-delay: 0s; left: 14%; }
+  .smoke:nth-child(2) { animation-delay: 2s; left: 16%; }
+  .smoke:nth-child(3) { animation-delay: 4s; left: 13%; }
+
+  @keyframes smokeRise {
+    0% { transform: translateY(0) scale(1); opacity: 0.4; }
+    50% { transform: translateY(-80px) translateX(5px) scale(3); opacity: 0.15; }
+    100% { transform: translateY(-180px) translateX(-8px) scale(6); opacity: 0; }
+  }
+
+  /* Top bar */
+  .header {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 420px;
+    padding: 16px 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+  }
+  .share-btn {
+    background: rgba(212, 168, 83, 0.15);
+    border: 1px solid rgba(212, 168, 83, 0.3);
+    color: var(--gold-light);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.06em;
+  }
+  .share-btn:active { background: rgba(212, 168, 83, 0.3); transform: scale(0.95); }
+
+  /* Merit display */
+  .merit-area {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    margin-top: 8px;
+  }
+  .merit-label {
+    font-size: 13px;
+    color: rgba(200, 180, 160, 0.7);
+    letter-spacing: 0.14em;
+  }
+  .merit-count {
+    font-size: 52px;
+    font-weight: 800;
+    color: var(--gold-light);
+    text-shadow: 0 0 30px rgba(212, 168, 83, 0.4);
+    line-height: 1.1;
+    transition: color 0.3s;
+  }
+  .merit-count.zeroed {
+    color: #e74c3c;
+    text-shadow: 0 0 30px rgba(231, 76, 60, 0.5);
+  }
+
+  /* Wooden fish area */
+  .fish-container {
+    position: relative;
+    z-index: 10;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 20px;
+  }
+  .fish-wrapper {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.08s ease-out;
+  }
+  .fish-wrapper.tapping {
+    transform: scale(0.92);
+  }
+  .fish-wrapper.shake {
+    animation: shake 0.5s ease-out;
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10% { transform: translateX(-8px) rotate(-1deg); }
+    20% { transform: translateX(8px) rotate(1deg); }
+    30% { transform: translateX(-6px) rotate(-0.5deg); }
+    40% { transform: translateX(6px) rotate(0.5deg); }
+    50% { transform: translateX(-4px); }
+    60% { transform: translateX(4px); }
+    70% { transform: translateX(-2px); }
+    80% { transform: translateX(2px); }
+    90%, 100% { transform: translateX(0); }
+  }
+
+  /* Mallet */
+  .mallet {
+    position: absolute;
+    top: -70px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-15deg);
+    transform-origin: bottom center;
+    transition: transform 0.06s ease-in;
+    z-index: 20;
+    pointer-events: none;
+  }
+  .mallet.strike {
+    transform: translateX(-50%) rotate(10deg);
+    transition: transform 0.04s ease-out;
+  }
+  .mallet svg {
+    width: 80px;
+    height: auto;
+  }
+
+  /* Wooden fish SVG area */
+  .wooden-fish { position: relative; z-index: 5; }
+  .wooden-fish svg {
+    width: 200px;
+    height: auto;
+    filter: drop-shadow(0 8px 24px rgba(0,0,0,0.5));
+  }
+
+  /* Ripple effect */
+  .ripple {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 0; height: 0;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+    animation: rippleOut 0.6s ease-out forwards;
+  }
+  @keyframes rippleOut {
+    0% { width: 0; height: 0; opacity: 0.6; }
+    100% { width: 240px; height: 240px; opacity: 0; }
+  }
+
+  /* Floating +1 */
+  .float-text {
+    position: fixed;
+    pointer-events: none;
+    z-index: 30;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--gold-light);
+    text-shadow: 0 0 12px rgba(212, 168, 83, 0.6);
+    animation: floatUp 0.9s ease-out forwards;
+  }
+  @keyframes floatUp {
+    0% { opacity: 1; transform: translateY(0) scale(0.6); }
+    30% { opacity: 1; transform: translateY(-30px) scale(1.1); }
+    100% { opacity: 0; transform: translateY(-90px) scale(0.8); }
+  }
+
+  /* Reset overlay */
+  .reset-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .reset-text {
+    font-size: 36px;
+    font-weight: 900;
+    color: #e74c3c;
+    text-shadow: 0 0 40px rgba(231, 76, 60, 0.7), 0 4px 20px rgba(0,0,0,0.6);
+    animation: resetPop 1.2s ease-out forwards;
+    text-align: center;
+    line-height: 1.4;
+  }
+  @keyframes resetPop {
+    0% { opacity: 0; transform: scale(0.3); }
+    20% { opacity: 1; transform: scale(1.2); }
+    40% { opacity: 1; transform: scale(0.95); }
+    60% { opacity: 1; transform: scale(1.05); }
+    100% { opacity: 0; transform: scale(1); }
+  }
+
+  /* Laughing emoji burst */
+  .emoji-burst {
+    position: fixed;
+    pointer-events: none;
+    z-index: 101;
+    font-size: 40px;
+    animation: emojiFly 1.8s ease-out forwards;
+  }
+  @keyframes emojiFly {
+    0% { opacity: 1; transform: translate(0, 0) scale(0.3) rotate(0deg); }
+    30% { opacity: 1; transform: translate(var(--dx30), var(--dy30)) scale(1.2) rotate(var(--rot30)); }
+    100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0.5) rotate(var(--rot)); }
+  }
+
+  /* Screen flash */
+  .flash {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    pointer-events: none;
+    background: rgba(231, 76, 60, 0.08);
+    animation: flashOut 0.4s ease-out forwards;
+  }
+  @keyframes flashOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  /* Footer */
+  .footer {
+    position: relative;
+    z-index: 10;
+    padding: 12px 20px 20px;
+    text-align: center;
+    color: rgba(200, 180, 160, 0.35);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+  }
+</style>
+</head>
+<body>
+
+<div class=""smoke-container"">
+  <div class=""smoke""></div>
+  <div class=""smoke""></div>
+  <div class=""smoke""></div>
+</div>
+
+<div class=""header"">
+  <span class=""title"">電子木魚</span>
+  <button class=""share-btn"" id=""shareBtn"" title=""分享"">分享</button>
+</div>
+
+<div class=""merit-area"">
+  <div class=""merit-label"">功 德</div>
+  <div class=""merit-count"" id=""meritCount"">0</div>
+</div>
+
+<div class=""fish-container"">
+  <div class=""fish-wrapper"" id=""fishWrapper"">
+    <div class=""mallet"" id=""mallet"">
+      <svg viewBox=""0 0 40 100"" xmlns=""http://www.w3.org/2000/svg"">
+        <defs>
+          <linearGradient id=""malletHandle"" x1=""0"" y1=""0"" x2=""1"" y2=""0"">
+            <stop offset=""0%"" stop-color=""#6b3a2a""/>
+            <stop offset=""50%"" stop-color=""#8b5a3a""/>
+            <stop offset=""100%"" stop-color=""#5c2d1e""/>
+          </linearGradient>
+          <radialGradient id=""malletHead"" cx=""50%"" cy=""40%"">
+            <stop offset=""0%"" stop-color=""#a0724a""/>
+            <stop offset=""100%"" stop-color=""#5c2d1e""/>
+          </radialGradient>
+        </defs>
+        <ellipse cx=""20"" cy=""16"" rx=""10"" ry=""12"" fill=""url(#malletHead)"" stroke=""#3d1c0f"" stroke-width=""0.5""/>
+        <rect x=""17.5"" y=""28"" width=""5"" height=""72"" rx=""2"" fill=""url(#malletHandle)"" stroke=""#3d1c0f"" stroke-width=""0.3""/>
+      </svg>
+    </div>
+    <div class=""wooden-fish"">
+      <svg viewBox=""0 0 200 160"" xmlns=""http://www.w3.org/2000/svg"">
+        <defs>
+          <radialGradient id=""fishBody"" cx=""45%"" cy=""35%"">
+            <stop offset=""0%"" stop-color=""#c08050""/>
+            <stop offset=""40%"" stop-color=""#8b5a3a""/>
+            <stop offset "100%"" stop-color=""#4a2010""/>
+          </radialGradient>
+          <radialGradient id=""fishHighlight"" cx=""35%"" cy=""30%"">
+            <stop offset=""0%"" stop-color=""rgba(255,220,180,0.25)""/>
+            <stop offset=""100%"" stop-color=""rgba(255,220,180,0)""/>
+          </radialGradient>
+          <linearGradient id=""slitGrad"" x1=""0"" y1=""0"" x2=""0"" y2=""1"">
+            <stop offset=""0%"" stop-color=""#1a0800""/>
+            <stop offset=""100%"" stop-color=""#4a2010""/>
+          </linearGradient>
+        </defs>
+        <!-- Fish body base shadow -->
+        <ellipse cx=""100"" cy=""85"" rx=""82"" ry=""55"" fill=""#2a0f05""/>
+        <!-- Fish body -->
+        <ellipse cx=""100"" cy=""82"" rx=""80"" ry=""53"" fill=""url(#fishBody)"" stroke=""#3d1c0f"" stroke-width=""2""/>
+        <!-- Fish body highlight -->
+        <ellipse cx=""100"" cy=""82"" rx=""80"" ry=""53"" fill=""url(#fishHighlight)""/>
+        <!-- Scale pattern -->
+        <g opacity=""0.12"" stroke=""#2a1005"" stroke-width=""1"" fill=""none"">
+          <path d=""M50,70 Q65,55 80,70 Q65,85 50,70Z""/>
+          <path d=""M70,65 Q85,50 100,65 Q85,80 70,65Z""/>
+          <path d=""M90,62 Q105,47 120,62 Q105,77 90,62Z""/>
+          <path d=""M110,62 Q125,47 140,62 Q125,77 110,62Z""/>
+          <path d=""M130,65 Q145,50 160,65 Q145,80 130,65Z""/>
+          <path d=""M45,82 Q60,67 75,82 Q60,97 45,82Z""/>
+          <path d=""M65,78 Q80,63 95,78 Q80,93 65,78Z""/>
+          <path d=""M85,75 Q100,60 115,75 Q100,90 85,75Z""/>
+          <path d=""M105,75 Q120,60 135,75 Q120,90 105,75Z""/>
+          <path d=""M125,78 Q140,63 155,78 Q140,93 125,78Z""/>
+          <path d=""M55,94 Q70,79 85,94 Q70,109 55,94Z""/>
+          <path d=""M75,90 Q90,75 105,90 Q90,105 75,90Z""/>
+          <path d=""M95,87 Q110,72 125,87 Q110,102 95,87Z""/>
+          <path d=""M115,87 Q130,72 145,87 Q130,102 115,87Z""/>
+          <path d=""M135,90 Q150,75 165,90 Q150,105 135,90Z""/>
+          <path d=""M65,104 Q80,89 95,104 Q80,119 65,104Z""/>
+          <path d=""M85,100 Q100,85 115,100 Q100,115 85,100Z""/>
+          <path d=""M105,100 Q120,85 135,100 Q120,115 105,100Z""/>
+        </g>
+        <!-- Slit (opening) -->
+        <ellipse cx=""100"" cy=""58"" rx=""30"" ry=""6"" fill=""url(#slitGrad)"" stroke=""#2a0f05"" stroke-width=""1.5""/>
+        <!-- Slit inner highlight -->
+        <ellipse cx=""100"" cy=""57"" rx=""26"" ry=""3"" fill=""#1a0500""/>
+        <!-- Fish mouth (right side - head) -->
+        <ellipse cx=""172"" cy=""82"" rx=""10"" ry=""20"" fill=""#3d1c0f"" stroke=""#2a0f05"" stroke-width=""1.5""/>
+        <ellipse cx=""170"" cy=""82"" rx=""5"" ry=""14"" fill=""#1a0800""/>
+        <!-- Fish eye -->
+        <circle cx=""158"" cy=""72"" r=""5"" fill=""#1a0800""/>
+        <circle cx=""159"" cy=""71"" r=""1.8"" fill=""#f0d68a"" opacity=""0.7""/>
+        <!-- Fish tail (left side) -->
+        <path d=""M20,82 L20,65 Q30,75 40,82 Q30,89 20,99Z"" fill=""#6b3a2a"" stroke=""#3d1c0f"" stroke-width=""1.5""/>
+        <!-- Fish fin (top) -->
+        <path d=""M90,32 Q100,22 110,32Z"" fill=""#7a4430"" stroke=""#3d1c0f"" stroke-width=""1""/>
+        <!-- Fish fin (bottom) -->
+        <path d=""M90,132 Q100,142 110,132Z"" fill=""#7a4430"" stroke=""#3d1c0f"" stroke-width=""1""/>
+        <!-- Wood grain lines -->
+        <g opacity=""0.08"" stroke=""#1a0800"" stroke-width=""0.8"" fill=""none"">
+          <path d=""M30,75 Q65,60 100,72 Q135,84 170,75""/>
+          <path d=""M25,85 Q65,72 100,82 Q135,92 175,82""/>
+          <path d=""M35,95 Q70,85 100,92 Q130,99 165,92""/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<div class=""footer"">叩叩 · 功德無量</div>
+
+<script>
+  (function() {
+    const meritEl = document.getElementById('meritCount');
+    const fishWrapper = document.getElementById('fishWrapper');
+    const mallet = document.getElementById('mallet');
+    const shareBtn = document.getElementById('shareBtn');
+    
+    // Audio context for knocking sound
+    let audioCtx = null;
+    
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+    
+    function playKnock() {
+      if (!audioCtx) return;
+      const now = audioCtx.currentTime;
+      
+      // Main impact
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(280, now);
+      osc.frequency.exponentialRampToValueAtTime(120, now + 0.08);
+      gain.gain.setValueAtTime(0.5, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(now);
+      osc.stop(now + 0.12);
+      
+      // Wood resonance
+      const osc2 = audioCtx.createOscillator();
+      const gain2 = audioCtx.createGain();
+      osc2.type = 'sine';
+      osc2.frequency.setValueAtTime(180, now);
+      osc2.frequency.exponentialRampToValueAtTime(80, now + 0.15);
+      gain2.gain.setValueAtTime(0.3, now);
+      gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+      osc2.connect(gain2);
+      gain2.connect(audioCtx.destination);
+      osc2.start(now);
+      osc2.stop(now + 0.18);
+    }
+
+    // Load merit from localStorage
+    let merit = parseInt(localStorage.getItem('woodenFishMerit') || '0', 10);
+    meritEl.textContent = merit;
+
+    // Floating text helper
+    function spawnFloatText(text, color) {
+      const el = document.createElement('div');
+      el.className = 'float-text';
+      el.textContent = text;
+      if (color) el.style.color = color;
+      // Position near the fish area
+      const fishRect = fishWrapper.getBoundingClientRect();
+      const cx = fishRect.left + fishRect.width / 2 + (Math.random() - 0.5) * 60;
+      const cy = fishRect.top + fishRect.height * 0.35;
+      el.style.left = cx + 'px';
+      el.style.top = cy + 'px';
+      document.body.appendChild(el);
+      el.addEventListener('animationend', () => el.remove());
+    }
+
+    // Ripple effect
+    function spawnRipple() {
+      const ripple = document.createElement('div');
+      ripple.className = 'ripple';
+      fishWrapper.appendChild(ripple);
+      ripple.addEventListener('animationend', () => ripple.remove());
+    }
+
+    // Reset with emoji burst
+    function doReset() {
+      merit = 0;
+      meritEl.textContent = '0';
+      meritEl.classList.add('zeroed');
+      localStorage.setItem('woodenFishMerit', '0');
+      setTimeout(() => meritEl.classList.remove('zeroed'), 600);
+
+      // Shake the fish
+      fishWrapper.classList.add('shake');
+      setTimeout(() => fishWrapper.classList.remove('shake'), 500);
+
+      // Screen flash
+      const flash = document.createElement('div');
+      flash.className = 'flash';
+      document.body.appendChild(flash);
+      flash.addEventListener('animationend', () => flash.remove());
+
+      // Reset overlay text
+      const overlay = document.createElement('div');
+      overlay.className = 'reset-overlay';
+      const rt = document.createElement('div');
+      rt.className = 'reset-text';
+      rt.innerHTML = '😂<br>功德清零';
+      overlay.appendChild(rt);
+      document.body.appendChild(overlay);
+      overlay.addEventListener('animationend', () => overlay.remove());
+
+      // Emoji burst
+      const emojis = ['😂', '🤣', '😆', '🫢', '😭'];
+      for (let i = 0; i < 10; i++) {
+        setTimeout(() => {
+          const emoji = document.createElement('div');
+          emoji.className = 'emoji-burst';
+          emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+          const angle = Math.random() * Math.PI * 2;
+          const dist = 100 + Math.random() * 180;
+          const dx = Math.cos(angle) * dist;
+          const dy = Math.sin(angle) * dist - 60;
+          const dx30 = dx * 0.3;
+          const dy30 = dy * 0.3;
+          const rot = (Math.random() - 0.5) * 360;
+          const rot30 = rot * 0.3;
+          emoji.style.setProperty('--dx', dx + 'px');
+          emoji.style.setProperty('--dy', dy + 'px');
+          emoji.style.setProperty('--dx30', dx30 + 'px');
+          emoji.style.setProperty('--dy30', dy30 + 'px');
+          emoji.style.setProperty('--rot', rot + 'deg');
+          emoji.style.setProperty('--rot30', rot30 + 'deg');
+          emoji.style.left = '50%';
+          emoji.style.top = '45%';
+          document.body.appendChild(emoji);
+          emoji.addEventListener('animationend', () => emoji.remove());
+        }, i * 50);
+      }
+    }
+
+    // Tap handler
+    fishWrapper.addEventListener('pointerdown', function(e) {
+      e.preventDefault();
+      initAudio();
+      
+      // Animation
+      fishWrapper.classList.add('tapping');
+      mallet.classList.add('strike');
+      spawnRipple();
+      playKnock();
+      
+      setTimeout(() => {
+        fishWrapper.classList.remove('tapping');
+        mallet.classList.remove('strike');
+      }, 100);
+
+      // 10% chance to reset
+      if (Math.random() < 0.1) {
+        doReset();
+      } else {
+        merit++;
+        meritEl.textContent = merit;
+        localStorage.setItem('woodenFishMerit', merit.toString());
+        spawnFloatText('功德+1');
+      }
+    });
+
+    // Share button
+    shareBtn.addEventListener('click', function() {
+      const url = window.location.href;
+      const title = '電子木魚 - 積累功德';
+      const text = '一起來敲木魚積累功德吧 🙏';
+      
+      if (navigator.share) {
+        navigator.share({ title, text, url }).catch(() => {});
+      } else {
+        // Fallback: copy link
+        navigator.clipboard.writeText(url).then(() => {
+          shareBtn.textContent = '已複製';
+          setTimeout(() => { shareBtn.textContent = '分享'; }, 1500);
+        }).catch(() => {});
+      }
+    });
+
+    // Prevent double-tap zoom
+    document.addEventListener('touchstart', function(e) {
+      if (e.target.closest('#fishWrapper') && e.touches.length > 1) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+  })();
+</script>
+</body>
+</html>
