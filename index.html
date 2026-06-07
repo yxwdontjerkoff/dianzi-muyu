@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
-<html lang=""zh-CN"">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-<meta charset=""UTF-8"">
-<meta name=""viewport"" content=""width=device-width, initial-scale=1.0, user-scalable=no"">
-<title>电子木鱼</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>????</title>
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -285,297 +285,266 @@
 </head>
 <body>
 
-<div class=""smoke-container"">
-  <div class=""smoke""></div>
-  <div class=""smoke""></div>
-  <div class=""smoke""></div>
+<div class="smoke-container">
+  <div class="smoke"></div>
+  <div class="smoke"></div>
+  <div class="smoke"></div>
 </div>
 
-<div class=""header"">
-  <span class=""title"">電子木魚</span>
-  <button class=""share-btn"" id=""shareBtn"" title=""分享"">分享</button>
+<div class="header">
+  <span class="title">????</span>
+  <button class="share-btn" id="shareBtn" title="??">??</button>
 </div>
 
-<div class=""merit-area"">
-  <div class=""merit-label"">功 德</div>
-  <div class=""merit-count"" id=""meritCount"">0</div>
+<div class="merit-area">
+  <div class="merit-label">? ?</div>
+  <div class="merit-count" id="meritCount">0</div>
 </div>
 
-<div class=""fish-container"">
-  <div class=""fish-wrapper"" id=""fishWrapper"">
-    <div class=""mallet"" id=""mallet"">
-      <svg viewBox=""0 0 40 100"" xmlns=""http://www.w3.org/2000/svg"">
+<div class="fish-container">
+  <div class="fish-wrapper" id="fishWrapper">
+    <div class="mallet" id="mallet">
+      <svg viewBox="0 0 40 100" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <linearGradient id=""malletHandle"" x1=""0"" y1=""0"" x2=""1"" y2=""0"">
-            <stop offset=""0%"" stop-color=""#6b3a2a""/>
-            <stop offset=""50%"" stop-color=""#8b5a3a""/>
-            <stop offset=""100%"" stop-color=""#5c2d1e""/>
+          <linearGradient id="malletHandle" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#6b3a2a"/>
+            <stop offset="50%" stop-color="#8b5a3a"/>
+            <stop offset="100%" stop-color="#5c2d1e"/>
           </linearGradient>
-          <radialGradient id=""malletHead"" cx=""50%"" cy=""40%"">
-            <stop offset=""0%"" stop-color=""#a0724a""/>
-            <stop offset=""100%"" stop-color=""#5c2d1e""/>
+          <radialGradient id="malletHead" cx="50%" cy="40%">
+            <stop offset="0%" stop-color="#a0724a"/>
+            <stop offset="100%" stop-color="#5c2d1e"/>
           </radialGradient>
         </defs>
-        <ellipse cx=""20"" cy=""16"" rx=""10"" ry=""12"" fill=""url(#malletHead)"" stroke=""#3d1c0f"" stroke-width=""0.5""/>
-        <rect x=""17.5"" y=""28"" width=""5"" height=""72"" rx=""2"" fill=""url(#malletHandle)"" stroke=""#3d1c0f"" stroke-width=""0.3""/>
+        <ellipse cx="20" cy="16" rx="10" ry="12" fill="url(#malletHead)" stroke="#3d1c0f" stroke-width="0.5"/>
+        <rect x="17.5" y="28" width="5" height="72" rx="2" fill="url(#malletHandle)" stroke="#3d1c0f" stroke-width="0.3"/>
       </svg>
     </div>
-    <div class=""wooden-fish"">
-      <svg viewBox=""0 0 200 160"" xmlns=""http://www.w3.org/2000/svg"">
+    <div class="wooden-fish">
+      <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <radialGradient id=""fishBody"" cx=""45%"" cy=""35%"">
-            <stop offset=""0%"" stop-color=""#c08050""/>
-            <stop offset=""40%"" stop-color=""#8b5a3a""/>
-            <stop offset "100%"" stop-color=""#4a2010""/>
+          <radialGradient id="fishBody" cx="45%" cy="35%">
+            <stop offset="0%" stop-color="#c08050"/>
+            <stop offset="40%" stop-color="#8b5a3a"/>
+            <stop offset="100%" stop-color="#4a2010"/>
           </radialGradient>
-          <radialGradient id=""fishHighlight"" cx=""35%"" cy=""30%"">
-            <stop offset=""0%"" stop-color=""rgba(255,220,180,0.25)""/>
-            <stop offset=""100%"" stop-color=""rgba(255,220,180,0)""/>
+          <radialGradient id="fishHighlight" cx="35%" cy="30%">
+            <stop offset="0%" stop-color="rgba(255,220,180,0.25)"/>
+            <stop offset="100%" stop-color="rgba(255,220,180,0)"/>
           </radialGradient>
-          <linearGradient id=""slitGrad"" x1=""0"" y1=""0"" x2=""0"" y2=""1"">
-            <stop offset=""0%"" stop-color=""#1a0800""/>
-            <stop offset=""100%"" stop-color=""#4a2010""/>
+          <linearGradient id="slitGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#1a0800"/>
+            <stop offset="100%" stop-color="#4a2010"/>
           </linearGradient>
         </defs>
-        <!-- Fish body base shadow -->
-        <ellipse cx=""100"" cy=""85"" rx=""82"" ry=""55"" fill=""#2a0f05""/>
-        <!-- Fish body -->
-        <ellipse cx=""100"" cy=""82"" rx=""80"" ry=""53"" fill=""url(#fishBody)"" stroke=""#3d1c0f"" stroke-width=""2""/>
-        <!-- Fish body highlight -->
-        <ellipse cx=""100"" cy=""82"" rx=""80"" ry=""53"" fill=""url(#fishHighlight)""/>
-        <!-- Scale pattern -->
-        <g opacity=""0.12"" stroke=""#2a1005"" stroke-width=""1"" fill=""none"">
-          <path d=""M50,70 Q65,55 80,70 Q65,85 50,70Z""/>
-          <path d=""M70,65 Q85,50 100,65 Q85,80 70,65Z""/>
-          <path d=""M90,62 Q105,47 120,62 Q105,77 90,62Z""/>
-          <path d=""M110,62 Q125,47 140,62 Q125,77 110,62Z""/>
-          <path d=""M130,65 Q145,50 160,65 Q145,80 130,65Z""/>
-          <path d=""M45,82 Q60,67 75,82 Q60,97 45,82Z""/>
-          <path d=""M65,78 Q80,63 95,78 Q80,93 65,78Z""/>
-          <path d=""M85,75 Q100,60 115,75 Q100,90 85,75Z""/>
-          <path d=""M105,75 Q120,60 135,75 Q120,90 105,75Z""/>
-          <path d=""M125,78 Q140,63 155,78 Q140,93 125,78Z""/>
-          <path d=""M55,94 Q70,79 85,94 Q70,109 55,94Z""/>
-          <path d=""M75,90 Q90,75 105,90 Q90,105 75,90Z""/>
-          <path d=""M95,87 Q110,72 125,87 Q110,102 95,87Z""/>
-          <path d=""M115,87 Q130,72 145,87 Q130,102 115,87Z""/>
-          <path d=""M135,90 Q150,75 165,90 Q150,105 135,90Z""/>
-          <path d=""M65,104 Q80,89 95,104 Q80,119 65,104Z""/>
-          <path d=""M85,100 Q100,85 115,100 Q100,115 85,100Z""/>
-          <path d=""M105,100 Q120,85 135,100 Q120,115 105,100Z""/>
+        <ellipse cx="100" cy="85" rx="82" ry="55" fill="#2a0f05"/>
+        <ellipse cx="100" cy="82" rx="80" ry="53" fill="url(#fishBody)" stroke="#3d1c0f" stroke-width="2"/>
+        <ellipse cx="100" cy="82" rx="80" ry="53" fill="url(#fishHighlight)"/>
+        <g opacity="0.12" stroke="#2a1005" stroke-width="1" fill="none">
+          <path d="M50,70 Q65,55 80,70 Q65,85 50,70Z"/>
+          <path d="M70,65 Q85,50 100,65 Q85,80 70,65Z"/>
+          <path d="M90,62 Q105,47 120,62 Q105,77 90,62Z"/>
+          <path d="M110,62 Q125,47 140,62 Q125,77 110,62Z"/>
+          <path d="M130,65 Q145,50 160,65 Q145,80 130,65Z"/>
+          <path d="M45,82 Q60,67 75,82 Q60,97 45,82Z"/>
+          <path d="M65,78 Q80,63 95,78 Q80,93 65,78Z"/>
+          <path d="M85,75 Q100,60 115,75 Q100,90 85,75Z"/>
+          <path d="M105,75 Q120,60 135,75 Q120,90 105,75Z"/>
+          <path d="M125,78 Q140,63 155,78 Q140,93 125,78Z"/>
+          <path d="M55,94 Q70,79 85,94 Q70,109 55,94Z"/>
+          <path d="M75,90 Q90,75 105,90 Q90,105 75,90Z"/>
+          <path d="M95,87 Q110,72 125,87 Q110,102 95,87Z"/>
+          <path d="M115,87 Q130,72 145,87 Q130,102 115,87Z"/>
+          <path d="M135,90 Q150,75 165,90 Q150,105 135,90Z"/>
+          <path d="M65,104 Q80,89 95,104 Q80,119 65,104Z"/>
+          <path d="M85,100 Q100,85 115,100 Q100,115 85,100Z"/>
+          <path d="M105,100 Q120,85 135,100 Q120,115 105,100Z"/>
         </g>
-        <!-- Slit (opening) -->
-        <ellipse cx=""100"" cy=""58"" rx=""30"" ry=""6"" fill=""url(#slitGrad)"" stroke=""#2a0f05"" stroke-width=""1.5""/>
-        <!-- Slit inner highlight -->
-        <ellipse cx=""100"" cy=""57"" rx=""26"" ry=""3"" fill=""#1a0500""/>
-        <!-- Fish mouth (right side - head) -->
-        <ellipse cx=""172"" cy=""82"" rx=""10"" ry=""20"" fill=""#3d1c0f"" stroke=""#2a0f05"" stroke-width=""1.5""/>
-        <ellipse cx=""170"" cy=""82"" rx=""5"" ry=""14"" fill=""#1a0800""/>
-        <!-- Fish eye -->
-        <circle cx=""158"" cy=""72"" r=""5"" fill=""#1a0800""/>
-        <circle cx=""159"" cy=""71"" r=""1.8"" fill=""#f0d68a"" opacity=""0.7""/>
-        <!-- Fish tail (left side) -->
-        <path d=""M20,82 L20,65 Q30,75 40,82 Q30,89 20,99Z"" fill=""#6b3a2a"" stroke=""#3d1c0f"" stroke-width=""1.5""/>
-        <!-- Fish fin (top) -->
-        <path d=""M90,32 Q100,22 110,32Z"" fill=""#7a4430"" stroke=""#3d1c0f"" stroke-width=""1""/>
-        <!-- Fish fin (bottom) -->
-        <path d=""M90,132 Q100,142 110,132Z"" fill=""#7a4430"" stroke=""#3d1c0f"" stroke-width=""1""/>
-        <!-- Wood grain lines -->
-        <g opacity=""0.08"" stroke=""#1a0800"" stroke-width=""0.8"" fill=""none"">
-          <path d=""M30,75 Q65,60 100,72 Q135,84 170,75""/>
-          <path d=""M25,85 Q65,72 100,82 Q135,92 175,82""/>
-          <path d=""M35,95 Q70,85 100,92 Q130,99 165,92""/>
+        <ellipse cx="100" cy="58" rx="30" ry="6" fill="url(#slitGrad)" stroke="#2a0f05" stroke-width="1.5"/>
+        <ellipse cx="100" cy="57" rx="26" ry="3" fill="#1a0500"/>
+        <ellipse cx="172" cy="82" rx="10" ry="20" fill="#3d1c0f" stroke="#2a0f05" stroke-width="1.5"/>
+        <ellipse cx="170" cy="82" rx="5" ry="14" fill="#1a0800"/>
+        <circle cx="158" cy="72" r="5" fill="#1a0800"/>
+        <circle cx="159" cy="71" r="1.8" fill="#f0d68a" opacity="0.7"/>
+        <path d="M20,82 L20,65 Q30,75 40,82 Q30,89 20,99Z" fill="#6b3a2a" stroke="#3d1c0f" stroke-width="1.5"/>
+        <path d="M90,32 Q100,22 110,32Z" fill="#7a4430" stroke="#3d1c0f" stroke-width="1"/>
+        <path d="M90,132 Q100,142 110,132Z" fill="#7a4430" stroke="#3d1c0f" stroke-width="1"/>
+        <g opacity="0.08" stroke="#1a0800" stroke-width="0.8" fill="none">
+          <path d="M30,75 Q65,60 100,72 Q135,84 170,75"/>
+          <path d="M25,85 Q65,72 100,82 Q135,92 175,82"/>
+          <path d="M35,95 Q70,85 100,92 Q130,99 165,92"/>
         </g>
       </svg>
     </div>
   </div>
 </div>
 
-<div class=""footer"">叩叩 · 功德無量</div>
+<div class="footer">?? ? ????</div>
 
 <script>
-  (function() {
-    const meritEl = document.getElementById('meritCount');
-    const fishWrapper = document.getElementById('fishWrapper');
-    const mallet = document.getElementById('mallet');
-    const shareBtn = document.getElementById('shareBtn');
-    
-    // Audio context for knocking sound
-    let audioCtx = null;
-    
-    function initAudio() {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      }
+(function() {
+  var meritEl = document.getElementById('meritCount');
+  var fishWrapper = document.getElementById('fishWrapper');
+  var mallet = document.getElementById('mallet');
+  var shareBtn = document.getElementById('shareBtn');
+
+  var audioCtx = null;
+
+  function initAudio() {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     }
-    
-    function playKnock() {
-      if (!audioCtx) return;
-      const now = audioCtx.currentTime;
-      
-      // Main impact
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(280, now);
-      osc.frequency.exponentialRampToValueAtTime(120, now + 0.08);
-      gain.gain.setValueAtTime(0.5, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start(now);
-      osc.stop(now + 0.12);
-      
-      // Wood resonance
-      const osc2 = audioCtx.createOscillator();
-      const gain2 = audioCtx.createGain();
-      osc2.type = 'sine';
-      osc2.frequency.setValueAtTime(180, now);
-      osc2.frequency.exponentialRampToValueAtTime(80, now + 0.15);
-      gain2.gain.setValueAtTime(0.3, now);
-      gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
-      osc2.connect(gain2);
-      gain2.connect(audioCtx.destination);
-      osc2.start(now);
-      osc2.stop(now + 0.18);
-    }
+  }
 
-    // Load merit from localStorage
-    let merit = parseInt(localStorage.getItem('woodenFishMerit') || '0', 10);
-    meritEl.textContent = merit;
+  function playKnock() {
+    if (!audioCtx) return;
+    var now = audioCtx.currentTime;
 
-    // Floating text helper
-    function spawnFloatText(text, color) {
-      const el = document.createElement('div');
-      el.className = 'float-text';
-      el.textContent = text;
-      if (color) el.style.color = color;
-      // Position near the fish area
-      const fishRect = fishWrapper.getBoundingClientRect();
-      const cx = fishRect.left + fishRect.width / 2 + (Math.random() - 0.5) * 60;
-      const cy = fishRect.top + fishRect.height * 0.35;
-      el.style.left = cx + 'px';
-      el.style.top = cy + 'px';
-      document.body.appendChild(el);
-      el.addEventListener('animationend', () => el.remove());
-    }
+    var osc = audioCtx.createOscillator();
+    var gain = audioCtx.createGain();
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(280, now);
+    osc.frequency.exponentialRampToValueAtTime(120, now + 0.08);
+    gain.gain.setValueAtTime(0.5, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start(now);
+    osc.stop(now + 0.12);
 
-    // Ripple effect
-    function spawnRipple() {
-      const ripple = document.createElement('div');
-      ripple.className = 'ripple';
-      fishWrapper.appendChild(ripple);
-      ripple.addEventListener('animationend', () => ripple.remove());
-    }
+    var osc2 = audioCtx.createOscillator();
+    var gain2 = audioCtx.createGain();
+    osc2.type = 'sine';
+    osc2.frequency.setValueAtTime(180, now);
+    osc2.frequency.exponentialRampToValueAtTime(80, now + 0.15);
+    gain2.gain.setValueAtTime(0.3, now);
+    gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+    osc2.connect(gain2);
+    gain2.connect(audioCtx.destination);
+    osc2.start(now);
+    osc2.stop(now + 0.18);
+  }
 
-    // Reset with emoji burst
-    function doReset() {
-      merit = 0;
-      meritEl.textContent = '0';
-      meritEl.classList.add('zeroed');
-      localStorage.setItem('woodenFishMerit', '0');
-      setTimeout(() => meritEl.classList.remove('zeroed'), 600);
+  var merit = parseInt(localStorage.getItem('woodenFishMerit') || '0', 10);
+  meritEl.textContent = merit;
 
-      // Shake the fish
-      fishWrapper.classList.add('shake');
-      setTimeout(() => fishWrapper.classList.remove('shake'), 500);
+  function spawnFloatText(text, color) {
+    var el = document.createElement('div');
+    el.className = 'float-text';
+    el.textContent = text;
+    if (color) el.style.color = color;
+    var fishRect = fishWrapper.getBoundingClientRect();
+    var cx = fishRect.left + fishRect.width / 2 + (Math.random() - 0.5) * 60;
+    var cy = fishRect.top + fishRect.height * 0.35;
+    el.style.left = cx + 'px';
+    el.style.top = cy + 'px';
+    document.body.appendChild(el);
+    el.addEventListener('animationend', function() { el.remove(); });
+  }
 
-      // Screen flash
-      const flash = document.createElement('div');
-      flash.className = 'flash';
-      document.body.appendChild(flash);
-      flash.addEventListener('animationend', () => flash.remove());
+  function spawnRipple() {
+    var ripple = document.createElement('div');
+    ripple.className = 'ripple';
+    fishWrapper.appendChild(ripple);
+    ripple.addEventListener('animationend', function() { ripple.remove(); });
+  }
 
-      // Reset overlay text
-      const overlay = document.createElement('div');
-      overlay.className = 'reset-overlay';
-      const rt = document.createElement('div');
-      rt.className = 'reset-text';
-      rt.innerHTML = '😂<br>功德清零';
-      overlay.appendChild(rt);
-      document.body.appendChild(overlay);
-      overlay.addEventListener('animationend', () => overlay.remove());
+  function doReset() {
+    merit = 0;
+    meritEl.textContent = '0';
+    meritEl.classList.add('zeroed');
+    localStorage.setItem('woodenFishMerit', '0');
+    setTimeout(function() { meritEl.classList.remove('zeroed'); }, 600);
 
-      // Emoji burst
-      const emojis = ['😂', '🤣', '😆', '🫢', '😭'];
-      for (let i = 0; i < 10; i++) {
-        setTimeout(() => {
-          const emoji = document.createElement('div');
+    fishWrapper.classList.add('shake');
+    setTimeout(function() { fishWrapper.classList.remove('shake'); }, 500);
+
+    var flash = document.createElement('div');
+    flash.className = 'flash';
+    document.body.appendChild(flash);
+    flash.addEventListener('animationend', function() { flash.remove(); });
+
+    var overlay = document.createElement('div');
+    overlay.className = 'reset-overlay';
+    var rt = document.createElement('div');
+    rt.className = 'reset-text';
+    rt.innerHTML = '\u{1F602}<br>\u{529F}\u{5FB7}\u{6E05}\u{96F6}';
+    overlay.appendChild(rt);
+    document.body.appendChild(overlay);
+    overlay.addEventListener('animationend', function() { overlay.remove(); });
+
+    var emojis = ['\u{1F602}', '\u{1F923}', '\u{1F606}', '\u{1FAE2}', '\u{1F62D}'];
+    for (var i = 0; i < 10; i++) {
+      (function(idx) {
+        setTimeout(function() {
+          var emoji = document.createElement('div');
           emoji.className = 'emoji-burst';
           emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-          const angle = Math.random() * Math.PI * 2;
-          const dist = 100 + Math.random() * 180;
-          const dx = Math.cos(angle) * dist;
-          const dy = Math.sin(angle) * dist - 60;
-          const dx30 = dx * 0.3;
-          const dy30 = dy * 0.3;
-          const rot = (Math.random() - 0.5) * 360;
-          const rot30 = rot * 0.3;
+          var angle = Math.random() * Math.PI * 2;
+          var dist = 100 + Math.random() * 180;
+          var dx = Math.cos(angle) * dist;
+          var dy = Math.sin(angle) * dist - 60;
           emoji.style.setProperty('--dx', dx + 'px');
           emoji.style.setProperty('--dy', dy + 'px');
-          emoji.style.setProperty('--dx30', dx30 + 'px');
-          emoji.style.setProperty('--dy30', dy30 + 'px');
+          emoji.style.setProperty('--dx30', dx * 0.3 + 'px');
+          emoji.style.setProperty('--dy30', dy * 0.3 + 'px');
+          var rot = (Math.random() - 0.5) * 360;
           emoji.style.setProperty('--rot', rot + 'deg');
-          emoji.style.setProperty('--rot30', rot30 + 'deg');
+          emoji.style.setProperty('--rot30', rot * 0.3 + 'deg');
           emoji.style.left = '50%';
           emoji.style.top = '45%';
           document.body.appendChild(emoji);
-          emoji.addEventListener('animationend', () => emoji.remove());
-        }, i * 50);
-      }
+          emoji.addEventListener('animationend', function() { emoji.remove(); });
+        }, idx * 50);
+      })(i);
     }
+  }
 
-    // Tap handler
-    fishWrapper.addEventListener('pointerdown', function(e) {
+  fishWrapper.addEventListener('pointerdown', function(e) {
+    e.preventDefault();
+    initAudio();
+
+    fishWrapper.classList.add('tapping');
+    mallet.classList.add('strike');
+    spawnRipple();
+    playKnock();
+
+    setTimeout(function() {
+      fishWrapper.classList.remove('tapping');
+      mallet.classList.remove('strike');
+    }, 100);
+
+    if (Math.random() < 0.1) {
+      doReset();
+    } else {
+      merit++;
+      meritEl.textContent = merit;
+      localStorage.setItem('woodenFishMerit', merit.toString());
+      spawnFloatText('\u{529F}\u{5FB7}+1');
+    }
+  });
+
+  shareBtn.addEventListener('click', function() {
+    var url = window.location.href;
+    var title = '\u{96FB}\u{5B50}\u{6728}\u{9B5A} - \u{7A4D}\u{7D2F}\u{529F}\u{5FB7}';
+    var text = '\u{4E00}\u{8D77}\u{4F86}\u{6572}\u{6728}\u{9B5A}\u{7A4D}\u{7D2F}\u{529F}\u{5FB7}\u{5427} \u{1F64F}';
+
+    if (navigator.share) {
+      navigator.share({ title: title, text: text, url: url }).catch(function() {});
+    } else {
+      navigator.clipboard.writeText(url).then(function() {
+        shareBtn.textContent = '\u{5DF2}\u{8907}\u{88FD}';
+        setTimeout(function() { shareBtn.textContent = '\u{5206}\u{4EAB}'; }, 1500);
+      }).catch(function() {});
+    }
+  });
+
+  document.addEventListener('touchstart', function(e) {
+    if (e.target.closest('#fishWrapper') && e.touches.length > 1) {
       e.preventDefault();
-      initAudio();
-      
-      // Animation
-      fishWrapper.classList.add('tapping');
-      mallet.classList.add('strike');
-      spawnRipple();
-      playKnock();
-      
-      setTimeout(() => {
-        fishWrapper.classList.remove('tapping');
-        mallet.classList.remove('strike');
-      }, 100);
-
-      // 10% chance to reset
-      if (Math.random() < 0.1) {
-        doReset();
-      } else {
-        merit++;
-        meritEl.textContent = merit;
-        localStorage.setItem('woodenFishMerit', merit.toString());
-        spawnFloatText('功德+1');
-      }
-    });
-
-    // Share button
-    shareBtn.addEventListener('click', function() {
-      const url = window.location.href;
-      const title = '電子木魚 - 積累功德';
-      const text = '一起來敲木魚積累功德吧 🙏';
-      
-      if (navigator.share) {
-        navigator.share({ title, text, url }).catch(() => {});
-      } else {
-        // Fallback: copy link
-        navigator.clipboard.writeText(url).then(() => {
-          shareBtn.textContent = '已複製';
-          setTimeout(() => { shareBtn.textContent = '分享'; }, 1500);
-        }).catch(() => {});
-      }
-    });
-
-    // Prevent double-tap zoom
-    document.addEventListener('touchstart', function(e) {
-      if (e.target.closest('#fishWrapper') && e.touches.length > 1) {
-        e.preventDefault();
-      }
-    }, { passive: false });
-  })();
+    }
+  }, { passive: false });
+})();
 </script>
 </body>
 </html>
